@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 
 <head>
     <meta charset="UTF-8">
@@ -23,28 +23,31 @@
                 <label for="parking">Mostra solo hotel con parcheggio disponibile</label>
                 <!-- Checkbox per il filtro del parcheggio -->
                 <input type="checkbox" name="parking" id="parking" <?= isset($_GET['parking']) ? 'checked' : '' ?>>
-                <button type="submit">Invia</button>
+                <button type="submit">Cerca</button>
             </form>
         </div>
-        
+
         <!-- Tabella per mostrare la lista degli hotel -->
         <table class="table">
             <thead>
                 <tr>
-                    <th scope="col">Nome</th>
-                    <th scope="col">Descrizione</th>
-                    <th scope="col">Parcheggio</th>
-                    <th scope="col">Voto</th>
-                    <th scope="col">Distanza dal centro</th>
+                    <th scope="col">Nome Hotel:</th>
+                    <th scope="col">Descrizione:</th>
+                    <th scope="col">Parcheggio:</th>
+                    <th scope="col">Voto:</th>
+                    <th scope="col">Distanza dal centro:</th>
                 </tr>
             </thead>
             <tbody>
                 <?php
-                // Ciclo attraverso ciascun hotel nell'array degli hotels
+                // Ciclo attraverso ciascun hotel 
                 foreach ($hotels as $hotel) {
-                    // Filtro hotel in base al parcheggio se il checkbox è selezionato
-                    if (isset($_GET['parking']) && !$hotel['parking']) {
-                        continue; 
+                    // Filtro hotel in base al parcheggio se checkbox è selezionato
+                    if (isset($_GET['parking'])) {
+                        // Controllo se il checkbox del parcheggio è selezionato
+                        if (!$hotel['parking']) {
+                            continue;
+                        }
                     }
                     echo "<tr>
                         <th scope=\"row\">{$hotel['name']}</th>
@@ -61,3 +64,9 @@
 </body>
 
 </html>
+
+<style>
+    main {
+        padding: 4rem;
+    }
+</style>
