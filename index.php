@@ -14,18 +14,15 @@
     <?php
     // recupero il contenuto del file arrayHotels
     require_once __DIR__ . '/arrayHotels.php';
-    // stampo in pagina per ogni informazione
-    foreach ($hotels as $hotel) {
-        // echo $hotel['name'] . '<br>';
-        // echo $hotel['description'] . '<br>';
-        // echo ($hotel['parking'] ? 'Parking available' : 'No parking') . '<br>';
-        // echo 'Vote: ' . $hotel['vote'] . '<br>';
-        // echo 'Distance to center: ' . $hotel['distance_to_center'] . ' km <br>';
-        // echo '<br>';
-    }
 
     ?>
     <main>
+        <div class="form">
+            <form action="./index.php" method="GET"></form>
+            <label for="parking">Mostra solo hotel con parcheggio libero</label>
+            <input type="checkbox" name="parking" id="parking" <?= isset($_GET['parking']) ? 'checked' : '' ?>>
+            <button type="submit">Invia</button>
+        </div>
         <table class="table">
             <thead>
                 <tr>
@@ -36,19 +33,21 @@
                     <th scope="col">Distance to center</th>
                 </tr>
             </thead>
+            <!-- foreach che comprende la sezione su cui voglio iterare in modo da escludere i vari th sopra -->
             <?php foreach ($hotels as $hotel) { ?>
-            <tbody>
-                <tr>
-                    <th scope="row"><?php echo $hotel['name'] . '<br>'; ?></th>
-                    <td><?php echo $hotel['description'] . '<br>'; ?></td>
-                    <td><?php echo ($hotel['parking'] ? 'Parking available' : 'No parking') . '<br>'; ?></td>
-                    <td><?php echo 'Vote: ' . $hotel['vote'] . '<br>'; ?></td>
-                    <td><?php echo 'Distance to center: ' . $hotel['distance_to_center'] . ' km <br>'; ?></td>
-                </tr>
+                <tbody>
+                    <tr>
+                        <th scope="row"><?php echo $hotel['name'] . '<br>'; ?></th>
+                        <td><?php echo $hotel['description'] . '<br>'; ?></td>
+                        <td><?php echo ($hotel['parking'] ? 'Parking available' : 'No parking') . '<br>'; ?></td>
+                        <td><?php echo 'Vote: ' . $hotel['vote'] . '<br>'; ?></td>
+                        <td><?php echo 'Distance to center: ' . $hotel['distance_to_center'] . ' km <br>'; ?></td>
+                    </tr>
                 <?php } ?>
-            </tbody>
+                </tbody>
         </table>
     </main>
 </body>
 
 </html>
+
